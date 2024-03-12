@@ -41,7 +41,7 @@ function App({ Component, pageProps }: AppProps) {
   const { i18n } = useTranslation();
   const { loadGitStar, setInitd, feConfigs } = useSystemStore();
   const [scripts, setScripts] = useState<FastGPTFeConfigsType['scripts']>([]);
-  const [title, setTitle] = useState(process.env.SYSTEM_NAME || 'AI');
+  const [title, setTitle] = useState(process.env.SYSTEM_NAME || 'WXBAI');
 
   useEffect(() => {
     // get init data
@@ -50,14 +50,14 @@ function App({ Component, pageProps }: AppProps) {
         feConfigs: { scripts, isPlus, show_git, systemTitle }
       } = await clientInitData();
 
-      setTitle(systemTitle || 'FastGPT');
+      setTitle(systemTitle || 'WXBAI');
 
       // log fastgpt
       if (!isPlus) {
         console.log(
-          '%cWelcome to FastGPT',
-          'font-family:Arial; color:#3370ff ; font-size:18px; font-weight:bold;',
-          `GitHub：https://github.com/labring/FastGPT`
+          //'%cWelcome to FastGPT',
+          //'font-family:Arial; color:#3370ff ; font-size:18px; font-weight:bold;',
+          // `GitHub：https://github.com/labring/FastGPT`
         );
       }
       if (show_git) {
