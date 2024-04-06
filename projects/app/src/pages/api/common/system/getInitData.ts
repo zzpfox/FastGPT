@@ -25,13 +25,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       reRankModels:
         global.reRankModels?.map((item) => ({
           ...item,
-          requestUrl: undefined,
-          requestAuth: undefined
+          requestUrl: '',
+          requestAuth: ''
         })) || [],
       whisperModel: global.whisperModel,
       audioSpeechModels: global.audioSpeechModels,
-      systemVersion: global.systemVersion || '0.0.0',
-      simpleModeTemplates: global.simpleModeTemplates
+      systemVersion: global.systemVersion || '0.0.0'
     }
   });
 }
@@ -68,7 +67,6 @@ export async function getInitConfig() {
     ]);
 
     console.log({
-      // simpleModeTemplates: global.simpleModeTemplates,
       communityPlugins: global.communityPlugins
     });
   } catch (error) {
@@ -92,6 +90,7 @@ export async function initSystemConfig() {
   // get config from database
   const config: FastGPTConfigFileType = {
     feConfigs: {
+      ...fileRes?.feConfigs,
       ...defaultFeConfigs,
       ...(dbConfig.feConfigs || {}),
       isPlus: !!FastGPTProUrl
@@ -141,39 +140,6 @@ export function getSystemVersion() {
   }
 }
 
-// async function getSimpleModeTemplates() {
-//   if (global.simpleModeTemplates && global.simpleModeTemplates.length > 0) return;
-
-//   try {
-//     const basePath =
-//       process.env.NODE_ENV === 'development' ? 'data/simpleTemplates' : '/app/data/simpleTemplates';
-//     // read data/simpleTemplates directory, get all json file
-//     const files = readdirSync(basePath);
-//     // filter json file
-//     const filterFiles = files.filter((item) => item.endsWith('.json'));
-
-//     // read json file
-//     const fileTemplates = filterFiles.map((item) => {
-//       const content = readFileSync(`${basePath}/${item}`, 'utf-8');
-//       return {
-//         id: item.replace('.json', ''),
-//         ...JSON.parse(content)
-//       };
-//     });
-
-//     // fetch templates from plus
-//     const plusTemplates = await getSimpleTemplatesFromPlus();
-
-//     global.simpleModeTemplates = [
-//       SimpleModeTemplate_FastGPT_Universal,
-//       ...plusTemplates,
-//       ...fileTemplates
-//     ];
-//   } catch (error) {
-//     global.simpleModeTemplates = [SimpleModeTemplate_FastGPT_Universal];
-//   }
-// }
-
 function getSystemPlugin() {
   if (global.communityPlugins && global.communityPlugins.length > 0) return;
 
@@ -185,7 +151,7 @@ function getSystemPlugin() {
   const filterFiles = files.filter((item) => item.endsWith('.json'));
 
   // read json file
-  const fileTemplates: PluginTemplateType[] = filterFiles.map((filename) => {
+  const fileTemplates: (PluginTemplateType & { weight: number })[] = filterFiles.map((filename) => {
     const content = readFileSync(`${basePath}/${filename}`, 'utf-8');
     return {
       ...JSON.parse(content),
@@ -193,6 +159,8 @@ function getSystemPlugin() {
       source: PluginSourceEnum.community
     };
   });
+
+  fileTemplates.sort((a, b) => b.weight - a.weight);
 
   global.communityPlugins = fileTemplates;
 }

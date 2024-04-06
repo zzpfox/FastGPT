@@ -1,11 +1,13 @@
-### Fast GPT V4.6.9
+### FastGPT V4.7
 
-1. 新增 - 知识库新增“增强处理”训练模式，可生成更多类型索引。
-2. 新增 - 完善了HTTP模块的变量提示。
-3. 新增 - HTTP模块支持OpenAI单接口导入。
-4. 新增 - 全局变量支持增加外部变量。可通过分享链接的Query或 API 的 variables 参数传入。
-5. 新增 - 内容提取模块增加默认值。
-6. 优化 - 问题补全。增加英文类型。同时可以设置为单独模块，方便复用。
-7. [点击查看高级编排介绍文档](https://doc.fastgpt.in/docs/workflow/intro)
-8. [使用文档](https://doc.fastgpt.in/docs/intro/)
-9. [点击查看商业版](https://doc.fastgpt.in/docs/commercial/)
+1. 新增 - 工具调用模块，可以让LLM模型根据用户意图，动态的选择其他模型或插件执行。
+2. 新增 - 分类和内容提取支持 functionCall 模式。部分模型支持 functionCall 不支持 ToolCall，也可以使用了。需要把 LLM 模型配置文件里的 `functionCall` 设置为 `true`， `toolChoice`设置为 `false`。如果 `toolChoice` 为 true，会走 tool 模式。
+3. 新增 - HTTP插件，可实现OpenAPI快速生成插件。
+4. 优化 - 高级编排性能。
+5. 优化 - AI模型选择。
+6. 优化 - 手动输入知识库弹窗。
+7. 优化 - 变量输入弹窗。
+8. 优化 - 浏览器读取文件自动推断编码，减少乱码情况。
+9. [点击查看高级编排介绍文档](https://doc.fastgpt.in/docs/workflow/intro)
+10. [使用文档](https://doc.fastgpt.in/docs/intro/)
+11. [点击查看商业版](https://doc.fastgpt.in/docs/commercial/)

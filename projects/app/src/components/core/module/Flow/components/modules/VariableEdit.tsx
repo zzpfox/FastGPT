@@ -32,7 +32,7 @@ import { useForm } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890', 6);
-import MyModal from '@/components/MyModal';
+import MyModal from '@fastgpt/web/components/common/MyModal';
 import MyTooltip from '@/components/MyTooltip';
 import { variableTip } from '@fastgpt/global/core/module/template/tip';
 import { useTranslation } from 'next-i18next';
@@ -83,16 +83,6 @@ const VariableEdit = ({
     name: 'variable.enums'
   });
 
-  const BoxBtnStyles: BoxProps = {
-    cursor: 'pointer',
-    px: 3,
-    py: 1,
-    borderRadius: 'md',
-    _hover: {
-      bg: 'myGray.150'
-    }
-  };
-
   const formatVariables = useMemo(() => {
     const results = formatEditorVariablePickerIcon(variables);
     return results.map((item) => {
@@ -114,29 +104,32 @@ const VariableEdit = ({
             <QuestionOutlineIcon display={['none', 'inline']} ml={1} />
           </MyTooltip>
         </Box>
-        <Flex
-          {...BoxBtnStyles}
-          alignItems={'center'}
+        <Button
+          variant={'transparentBase'}
+          leftIcon={<SmallAddIcon />}
+          iconSpacing={1}
+          size={'sm'}
+          mr={'-5px'}
+          fontSize={'md'}
           onClick={() => {
             resetEdit({ variable: addVariable() });
             onOpenEdit();
           }}
         >
-          <SmallAddIcon />
           {t('common.Add New')}
-        </Flex>
+        </Button>
       </Flex>
       {formatVariables.length > 0 && (
         <Box mt={2} borderRadius={'md'} overflow={'hidden'} borderWidth={'1px'} borderBottom="none">
           <TableContainer>
             <Table bg={'white'}>
               <Thead>
-                <Tr>
-                  <Th w={'18px !important'} p={0} bg={'myGray.50'} />
-                  <Th bg={'myGray.50'}>{t('core.module.variable.variable name')}</Th>
-                  <Th bg={'myGray.50'}>{t('core.module.variable.key')}</Th>
-                  <Th bg={'myGray.50'}>{t('common.Require Input')}</Th>
-                  <Th bg={'myGray.50'}></Th>
+                <Tr bg={'myGray.50'}>
+                  <Th w={'18px !important'} p={0} />
+                  <Th>{t('core.module.variable.variable name')}</Th>
+                  <Th>{t('core.module.variable.key')}</Th>
+                  <Th>{t('common.Require Input')}</Th>
+                  <Th></Th>
                 </Tr>
               </Thead>
               <Tbody>
