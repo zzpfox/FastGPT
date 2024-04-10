@@ -7,10 +7,12 @@ import { readFileRawText } from '../read/rawText';
 import { readMarkdown } from '../read/markdown';
 import { readHtmlRawText } from '../read/html';
 import { readPdfFile } from '../read/pdf';
+import { readdocFile } from '../read/doc';//zzpfox
 import { readWordFile } from '../read/word';
 import { readCsvRawText } from '../read/csv';
 import { readPptxRawText } from '../read/pptx';
 import { readXlsxRawText } from '../read/xlsx';
+import { readtifFile } from './tif';
 
 export const initMarkdownText = ({
   teamId,
@@ -53,6 +55,10 @@ export const readFileRawContent = async ({
       return readPdfFile(params);
     case 'docx':
       return readWordFile(params);
+    case 'doc':
+      return readdocFile(params);//zzpfox
+    case 'tif':
+      return readtifFile(params);//zzpfox
     case 'pptx':
       return readPptxRawText(params);
     case 'xlsx':

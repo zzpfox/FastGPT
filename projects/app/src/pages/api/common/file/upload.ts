@@ -12,13 +12,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     maxSize: (global.feConfigs?.uploadFileMaxSize || 500) * 1024 * 1024
   });
   const filePaths: string[] = [];
-
+  const filetypes: string[] = [];
+  let filetype: string;
   try {
     await connectToDatabase();
     const { file, bucketName, metadata } = await upload.doUpload(req, res);
 
     filePaths.push(file.path);
-
+    filetypes.push(file.mimetype);
+    console.log(filetypes);
     const { teamId, tmbId } = await authCert({ req, authToken: true });
 
     if (!bucketName) {
@@ -34,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       contentType: file.mimetype,
       metadata: metadata
     });
-
+    console.log(file.path)
     jsonRes(res, {
       data: fileId
     });
@@ -44,8 +46,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       error
     });
   }
+  var i: number;
+  const fp: string[] = [];
+  console.log(filetypes.toString());
+  for (i = 0; i < filetypes.length; i++) {
+    if (!(filetypes[i].toString().includes("pdf") || filetypes[i].toString().includes("tif") || filetypes[i].toString().includes("doc")))//&& filetypes[i].toString().includes("msword")))//!= 'application/pdf')
 
-  removeFilesByPaths(filePaths);
+      fp.push(filePaths[i])
+
+
+  }
+  removeFilesByPaths(fp);
 }
 
 export const config = {

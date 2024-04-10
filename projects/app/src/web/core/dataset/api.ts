@@ -79,14 +79,14 @@ export const getDatasetCollectionById = (id: string) =>
 export const postDatasetCollection = (data: CreateDatasetCollectionParams) =>
   POST<string>(`/core/dataset/collection/create`, data);
 export const postCreateDatasetFileCollection = (data: FileIdCreateDatasetCollectionParams) =>
-  POST<{ collectionId: string }>(`/core/dataset/collection/create/file`, data, { timeout: 120000 });
+  POST<{ collectionId: string }>(`/core/dataset/collection/create/file`, data, { timeout: 1200000 });//zzpfox
 export const postCreateDatasetLinkCollection = (data: LinkCreateDatasetCollectionParams) =>
   POST<{ collectionId: string }>(`/core/dataset/collection/create/link`, data);
 export const postCreateDatasetTextCollection = (data: TextCreateDatasetCollectionParams) =>
   POST<{ collectionId: string }>(`/core/dataset/collection/create/text`, data);
 export const postCreateDatasetCsvTableCollection = (data: CsvTableCreateDatasetCollectionParams) =>
   POST<{ collectionId: string }>(`/core/dataset/collection/create/csvTable`, data, {
-    timeout: 120000
+    timeout: 1200000//zzpfox
   });
 
 export const putDatasetCollectionById = (data: UpdateDatasetCollectionParams) =>

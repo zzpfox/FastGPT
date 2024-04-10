@@ -6,9 +6,18 @@ import { DatasetFileSchema } from '@fastgpt/global/core/dataset/type';
 import { MongoFileSchema } from './schema';
 import { detectFileEncoding } from '@fastgpt/global/common/file/tools';
 import { CommonErrEnum } from '@fastgpt/global/common/error/code/common';
-import { ReadFileByBufferParams } from '../read/type';
+import { ReadFileByBufferParams, ReadFileByPR } from '../read/type';
+//import { filep } from '../read/type';
 import { MongoRwaTextBuffer } from '../../buffer/rawText/schema';
 import { readFileRawContent } from '../read/utils';
+//import { global } from 'styled-jsx/css';
+
+//export const filep: ReadFileByPR[] = [];
+
+/*namespace filepppp {
+  export const x = filep;
+}*/
+
 
 export function getGFSCollection(bucket: `${BucketNameEnum}`) {
   MongoFileSchema;
@@ -19,6 +28,8 @@ export function getGridBucket(bucket: `${BucketNameEnum}`) {
     bucketName: bucket
   });
 }
+
+//let ffpath: string = "";
 
 /* crud  file */
 export async function uploadFile({
@@ -62,6 +73,36 @@ export async function uploadFile({
       .on('finish', resolve)
       .on('error', reject);
   });
+  console.log("34333333333333")
+  //global.
+  //const filep: ReadFileByPR = {
+  //  ffpath:path,
+  //  fileId:String(stream.id)
+  //};
+  //Buffer.from(filep)
+  const fp: ReadFileByPR = {
+    ffpath: path,
+    fileId: String(stream.id),
+    findex: 0
+  };
+
+  //filep.push(fp)
+  //filepppp.x.push(fp);
+  //global.filep.push(fp);
+  //fp.ffpath = path;
+  console.log(path)
+  //const fpathhh = require('../read/type');
+  //const fileIdd = require('../read/type');
+  if (global.fpathhhhhh == undefined) {
+    global.fpathhhhhh = []
+  }
+  global.fpathhhhhh.push(path)
+  console.log(String(stream.id))
+  if (global.fileIddddd == undefined) {
+    global.fileIddddd = []
+  }
+  global.fileIddddd.push(String(stream.id))
+  console.log("55555555555555")
 
   return String(stream.id);
 }
@@ -189,8 +230,29 @@ export const readFileContentFromMongo = async ({
     });
   })();
 
+  console.log(11111111111)
+  // console.log(global.ffpath)
+  //根据fileID找path
+
+  //const fpathhh = require('../read/type');
+  //const fileIdd = require('../read/type');
+  console.log(global.fileIddddd)
+  console.log(global.fpathhhhhh)
+  //console.log("222222222222222222")
+  const index: number = global.fileIddddd.findIndex((element) => element === fileId);
+  const fpath = global.fpathhhhhh[index];
+
+  global.fileIddddd.splice(index, 1)
+  global.fpathhhhhh.splice(index, 1)
+  //const index = 0
+  //global.index = index;
+  // params.fpath = ffpath;
+  console.log(index)
+  console.log(fpath)
   const params: ReadFileByBufferParams = {
     teamId,
+    index: index,
+    fpath: fpath,
     buffer: fileBuffers,
     encoding,
     metadata: {
@@ -198,6 +260,7 @@ export const readFileContentFromMongo = async ({
     }
   };
 
+  console.log(params.fpath)
   const { rawText } = await readFileRawContent({
     extension,
     csvFormat,

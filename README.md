@@ -38,8 +38,6 @@ https://github.com/labring/FastGPT/assets/15308462/7d3a38df-eb0e-4388-9250-2409b
 
 - 🌍 海外版：[fastgpt.in](https://fastgpt.in/)
 
-fastgpt.run 域名会弃用。
-
 |                                    |                                    |
 | ---------------------------------- | ---------------------------------- |
 | ![Demo](./.github/imgs/intro1.png) | ![Demo](./.github/imgs/intro2.png) |
@@ -53,23 +51,21 @@ fastgpt.run 域名会弃用。
 
 `1` 应用编排能力
    - [x] 提供简易模式，无需操作编排
-   - [x] 对话下一步指引
    - [x] 工作流编排
    - [x] 源文件引用追踪
    - [x] 模块封装，实现多级复用
-   - [x] 混合检索 & 重排
    - [x] Tool 模块
-   - [ ] 嵌入 [Laf](https://github.com/labring/laf)，实现在线编写 HTTP 模块
+   - [ ] 嵌入 [Laf](https://github.com/labring/laf)，实现在线编写 HTTP 模块。初版已完成。
    - [ ] 插件封装功能，支持低代码渲染
 
 `2` 知识库能力
    - [x] 多库复用，混用
    - [x] chunk 记录修改和删除
-   - [x] 支持知识库单独设置向量模型
    - [x] 源文件存储
    - [x] 支持手动输入，直接分段，QA 拆分导入
-   - [x] 支持。txt， 。md， 。html， 。pdf， 。docx，pptx， 。csv， 。xlsx (有需要更多可 PR file loader)
+   - [x] 支持 txt，md，html，pdf，docx，pptx，csv，xlsx (有需要更多可 PR file loader)
    - [x] 支持 url 读取、CSV 批量导入
+   - [x] 混合检索 & 重排
    - [ ] 支持文件阅读器
    - [ ] 更多的数据预处理方案
   
@@ -90,6 +86,8 @@ fastgpt.run 域名会弃用。
    - [x] Iframe 一键嵌入
    - [x] 聊天窗口嵌入支持自定义 Icon，默认打开，拖拽等功能
    - [x] 统一查阅对话记录，并对数据进行标注
+`6` 其他
+   - [x] 支持语音输入和输出 (可配置语音输入语音回答)
 
 <a href="#readme">
     <img src="https://img.shields.io/badge/-返回顶部-7d09f1.svg" alt="#" align="right">
@@ -103,7 +101,7 @@ fastgpt.run 域名会弃用。
 
   > [Sealos](https://sealos.io) 的服务器在国外，不需要额外处理网络问题，无需服务器、无需魔法、无需域名，支持高并发 & 动态伸缩。点击以下按钮即可一键部署 👇
 
-  [![](https://cdn.jsdelivr.us/gh/labring-actions/templates@main/Deploy-on-Sealos.svg)](https://cloud.sealos.io/?openapp=system-fastdeploy%3FtemplateName%3Dfastgpt)
+  [![](https://cdn.jsdelivr.net/gh/labring-actions/templates@main/Deploy-on-Sealos.svg)](https://cloud.sealos.io/?openapp=system-fastdeploy%3FtemplateName%3Dfastgpt)
 
   由于需要部署数据库，部署完后需要等待 2~4 分钟才能正常访问。默认用了最低配置，首次访问时会有些慢。相关使用教程可查看：[Sealos 部署 FastGPT](https://doc.fastgpt.in/docs/development/sealos/)
 

@@ -9,7 +9,7 @@ export const postUploadFiles = (
   onUploadProgress: (progressEvent: AxiosProgressEvent) => void
 ) =>
   POST<string>('/common/file/upload', data, {
-    timeout: 480000,
+    timeout: 4800000,//zzpfox
     onUploadProgress,
     headers: {
       'Content-Type': 'multipart/form-data; charset=utf-8'
